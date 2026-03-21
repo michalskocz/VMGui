@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 1000 300"
+   fill="none"
+   version="1.1"
+   id="svg12"
+   sodipodi:docname="VM-Gui.svg"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview12"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#505050"
+     inkscape:zoom="0.86408449"
+     inkscape:cx="546.82153"
+     inkscape:cy="70.594949"
+     inkscape:window-width="1920"
+     inkscape:window-height="1011"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg12" />
+  <defs
+     id="defs9">
+    <!-- TEXT -->
+    <linearGradient
+       id="vmGrad"
+       x1="0"
+       y1="0"
+       x2="0"
+       y2="1">
+      <stop
+         offset="0%"
+         stop-color="#6fb6ff"
+         id="stop1" />
+      <stop
+         offset="100%"
+         stop-color="#0b3f88"
+         id="stop2" />
+    </linearGradient>
+    <linearGradient
+       id="guiGrad"
+       x1="0"
+       y1="0"
+       x2="1"
+       y2="0">
+      <stop
+         offset="0%"
+         stop-color="#ffb347"
+         id="stop3" />
+      <stop
+         offset="100%"
+         stop-color="#ff6a00"
+         id="stop4" />
+    </linearGradient>
+    <!-- ARC GRADIENT (bardziej smooth i dynamiczny) -->
+    <linearGradient
+       id="arcGrad"
+       x1="92.669395"
+       y1="30.610586"
+       x2="344.9574"
+       y2="30.610586"
+       gradientTransform="scale(2.6049593,0.38388316)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0%"
+         stop-color="#4aa3ff"
+         id="stop5" />
+      <stop
+         offset="40%"
+         stop-color="#3b82f6"
+         id="stop6" />
+      <stop
+         offset="70%"
+         stop-color="#ff9f1a"
+         id="stop7" />
+      <stop
+         offset="100%"
+         stop-color="#ff6a00"
+         id="stop8" />
+    </linearGradient>
+    <!-- subtelny glow -->
+    <filter
+       id="arcGlow"
+       x="-0.03"
+       y="-0.31738873"
+       width="1.06"
+       height="1.6305352">
+      <feGaussianBlur
+         stdDeviation="4"
+         result="blur"
+         id="feGaussianBlur8" />
+      <feMerge
+         id="feMerge9">
+        <feMergeNode
+           in="blur"
+           id="feMergeNode8" />
+        <feMergeNode
+           in="SourceGraphic"
+           id="feMergeNode9" />
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- TEXT -->
+  <text
+     x="100"
+     y="200"
+     font-size="140"
+     font-weight="900"
+     font-family="Arial, Helvetica, sans-serif"
+     fill="url(#vmGrad)"
+     id="text9">
+    VM
+  </text>
+  <text
+     x="320"
+     y="200"
+     font-size="140"
+     font-weight="900"
+     font-family="Arial, Helvetica, sans-serif"
+     fill="url(#guiGrad)"
+     id="text10">
+    Gui
+  </text>
+  <!-- MAIN ARC -->
+  <path
+     d="M 260,70 C 400,10 650,20 880,90"
+     stroke="url(#arcGrad)"
+     stroke-width="18"
+     stroke-linecap="round"
+     fill="none"
+     filter="url(#arcGlow)"
+     id="path10"
+     style="stroke:url(#arcGrad)"
+     transform="matrix(0.53749114,0,0,2.0114251,174.22907,-40.610305)" />
+  <!-- secondary highlight (pseudo 3D efekt) -->
+  <path
+     d="M 312.59204,98.347416 C 389.70406,-44.514342 521.89613,12.630362 643.07218,141.20594"
+     stroke="#ffffff"
+     stroke-width="5.01799"
+     stroke-linecap="round"
+     opacity="0.35"
+     fill="none"
+     id="path11" />
+  <!-- subtle shadow under arc -->
+  <path
+     d="M 313.21181,101.51086 C 389.19801,-6.4563579 524.88768,11.538177 649.72217,137.49993"
+     stroke="#1e3a8a"
+     stroke-width="5.92959"
+     stroke-linecap="round"
+     opacity="0.25"
+     fill="none"
+     id="path12" />
+</svg>
