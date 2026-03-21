@@ -22,32 +22,30 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-package com.github.mskocz.vmgui;
+package com.github.mskocz.vmgui.guicontrollers.Drowing;
 
-import com.github.mskocz.vmgui.guicontrollers.AppTheme;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import javafx.scene.canvas.Canvas;
 
-import java.io.IOException;
+public class ResizableCanvas extends Canvas {
 
-
-public class VMGui extends Application {
     @Override
-    public void start(Stage stage) throws IOException {
-        var fxmlLoader = new FXMLLoader(VMGui.class.getResource("gui/Topology.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-
-        AppTheme.DRACULA.apply();
-        stage.setTitle("VM-Gui");
-        stage.setResizable(true);
-        stage.setScene(scene);
-        stage.show();
+    public boolean isResizable() {
+        return true;
     }
 
-    public static void launch() {
-        Application.launch(VMGui.class);
+    @Override
+    public double prefWidth(double height) {
+        return getWidth();
     }
 
+    @Override
+    public double prefHeight(double width) {
+        return getHeight();
+    }
+
+    @Override
+    public void resize(double width, double height) {
+          setWidth(width);
+          setHeight(height);
+    }
 }

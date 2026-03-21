@@ -22,32 +22,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-package com.github.mskocz.vmgui;
+package com.github.mskocz.vmengine;
 
-import com.github.mskocz.vmgui.guicontrollers.AppTheme;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-
-import java.io.IOException;
-
-
-public class VMGui extends Application {
-    @Override
-    public void start(Stage stage) throws IOException {
-        var fxmlLoader = new FXMLLoader(VMGui.class.getResource("gui/Topology.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-
-        AppTheme.DRACULA.apply();
-        stage.setTitle("VM-Gui");
-        stage.setResizable(true);
-        stage.setScene(scene);
-        stage.show();
-    }
+public class Engine {
 
     public static void launch() {
-        Application.launch(VMGui.class);
+
     }
 
+
+    private Engine() throws ExceptionInInitializerError{
+        throw new ExceptionInInitializerError("Cannot create an instance of this class");
+    }
 }

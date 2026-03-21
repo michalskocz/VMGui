@@ -1,4 +1,3 @@
-/*
 MIT License
 
 Copyright (c) 2026 Michał Skoczylas
@@ -20,34 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-*/
-
-package com.github.mskocz.vmgui;
-
-import com.github.mskocz.vmgui.guicontrollers.AppTheme;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-
-import java.io.IOException;
-
-
-public class VMGui extends Application {
-    @Override
-    public void start(Stage stage) throws IOException {
-        var fxmlLoader = new FXMLLoader(VMGui.class.getResource("gui/Topology.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-
-        AppTheme.DRACULA.apply();
-        stage.setTitle("VM-Gui");
-        stage.setResizable(true);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public static void launch() {
-        Application.launch(VMGui.class);
-    }
-
-}

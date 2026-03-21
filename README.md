@@ -2,6 +2,6 @@
 
 ### Build
 ```bash
-./gradlew convertOcticonsToPng shadowJar
-
+./gradlew convertOcticonsToPng
+./gradlew shadowJar -PskipSvgConvert
 ```

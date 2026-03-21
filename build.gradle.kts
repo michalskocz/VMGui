@@ -69,6 +69,7 @@ tasks.withType<JavaExec> {
 }
 
 
+val skipSvgConvert = project.hasProperty("skipSvgConvert")
 val svgDir = file("external/octicons/icons")
 val pngDir = file("src/main/resources/external/octicons")
 
@@ -98,7 +99,9 @@ val convertOcticonsToPng by tasks.registering(JavaExec::class) {
 
 
 tasks.named<ProcessResources>("processResources") {
-    dependsOn(convertOcticonsToPng)
+    if (!skipSvgConvert) {
+        dependsOn(convertOcticonsToPng)
+    }
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
     from(pngDir) {
         into("external/octicons")

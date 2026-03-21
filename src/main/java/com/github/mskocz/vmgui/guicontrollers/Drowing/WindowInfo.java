@@ -22,32 +22,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-package com.github.mskocz.vmgui;
+package com.github.mskocz.vmgui.guicontrollers.Drowing;
 
-import com.github.mskocz.vmgui.guicontrollers.AppTheme;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import javafx.scene.canvas.GraphicsContext;
 
-import java.io.IOException;
-
-
-public class VMGui extends Application {
-    @Override
-    public void start(Stage stage) throws IOException {
-        var fxmlLoader = new FXMLLoader(VMGui.class.getResource("gui/Topology.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-
-        AppTheme.DRACULA.apply();
-        stage.setTitle("VM-Gui");
-        stage.setResizable(true);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public static void launch() {
-        Application.launch(VMGui.class);
-    }
-
+public record WindowInfo(GraphicsContext gc, double width, double height)  {
 }

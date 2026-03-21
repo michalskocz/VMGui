@@ -22,32 +22,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-package com.github.mskocz.vmgui;
+package com.github.mskocz.vmgui.guicontrollers.Drowing;
 
-import com.github.mskocz.vmgui.guicontrollers.AppTheme;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-
-import java.io.IOException;
-
-
-public class VMGui extends Application {
-    @Override
-    public void start(Stage stage) throws IOException {
-        var fxmlLoader = new FXMLLoader(VMGui.class.getResource("gui/Topology.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-
-        AppTheme.DRACULA.apply();
-        stage.setTitle("VM-Gui");
-        stage.setResizable(true);
-        stage.setScene(scene);
-        stage.show();
+public class CanvasUtils {
+    public static boolean isPointInvalid(CartesianPoint p, double width, double height) throws IllegalArgumentException{
+        if (width <= 0 || height <= 0) {
+            throw  new IllegalArgumentException("The window value passed is invalid.");
+        }
+        double x = p.x();
+        double y = p.y();
+        return !(x >= 0) || !(x <= width) || !(y >= 0) || !(y <= height);
     }
-
-    public static void launch() {
-        Application.launch(VMGui.class);
-    }
-
 }
