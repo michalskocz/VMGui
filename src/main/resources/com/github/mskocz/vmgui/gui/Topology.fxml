@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.Region?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.github.mskocz.vmgui.guicontrollers.TopologyController"
+            prefWidth="1200" prefHeight="800">
+    <top>
+        <HBox alignment="CENTER_LEFT">
+            <MenuBar>
+                <Menu text="Files">
+                    <MenuItem text="Load" />
+                    <MenuItem text="Save" />
+                    <MenuItem text="Import" />
+                    <MenuItem text="Export" />
+                </Menu>
+
+                <Menu text="Edit" />
+
+                <Menu text="Theme">
+                    <MenuItem text="Primer Light" onAction="#setPrimerLight" />
+                    <MenuItem text="Primer Dark" onAction="#setPrimerDark" />
+                    <MenuItem text="Nord Light" onAction="#setNordLight" />
+                    <MenuItem text="Nord Dark" onAction="#setNordDark" />
+                    <MenuItem text="Cupertino Light" onAction="#setCupertinoLight" />
+                    <MenuItem text="Cupertino Dark" onAction="#setCupertinoDark" />
+                    <MenuItem text="Dracula" onAction="#setDracula" />
+                </Menu>
+
+                <Menu text="Help" />
+            </MenuBar>
+
+            <!-- 🔥 spacer -->
+            <Region HBox.hgrow="ALWAYS" />
+
+            <!-- GitHub po prawej -->
+            <Button>
+                <graphic>
+                    <ImageView>
+                        <Image url="@/external/octicons/lockup-github-24.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </HBox>
+    </top>
+
+    <left>
+    </left>
+
+    <center>
+
+    </center>
+
+</BorderPane>

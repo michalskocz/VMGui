@@ -1,0 +1,22 @@
+[versions]
+app = "1.0"
+java = "17"
+
+javafx = "17"
+javafxPlugin = "0.1.0"
+atlantafx = "2.0.0"
+jupiter = "5.12.1"
+shadowjar = "9.4.0"
+apache_xmlgraphics = "1.16"
+
+
+[libraries]
+jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "jupiter" }
+jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "jupiter"}
+atlantafx = { module = "io.github.mkpaz:atlantafx-base", version.ref = "atlantafx" }
+xmlgraphic-transcoder = { module = "org.apache.xmlgraphics:batik-transcoder", version.ref = "apache_xmlgraphics"}
+xmlgraphic-codec = { module = "org.apache.xmlgraphics:batik-codec", version.ref = "apache_xmlgraphics"}
+
+[plugins]
+javafx = { id = "org.openjfx.javafxplugin", version.ref = "javafxPlugin" }
+shadowjar = { id = "com.gradleup.shadow", version.ref = "shadowjar"}
