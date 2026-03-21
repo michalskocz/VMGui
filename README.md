@@ -55,7 +55,7 @@ git clone --recurse-submodules https://github.com/michalskocz/VMGui.git
 java -jar build/libs/VMGui-1.0-all.jar
 ````
 
-If you're building a Kotlin project, add the flag below to skip converting icons to PNG after the first build:
+If you're building multiple times add the flag below to skip converting icons to PNG after the first build:
 
 ```bash
 ./gradlew shadowJar -PskipSvgConvert
