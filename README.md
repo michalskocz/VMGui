@@ -50,7 +50,7 @@
 To quickly build and run the project, clone the repository along with the submodules and run the Gradle build:
 
 ```bash
-git clone --recurse-submodules https://github.com/michalskocz/VMGui.git
+git clone --recurse-submodules https://github.com/michalskocz/VMGui.git && cd VMGui
 ./gradlew shadowJar
 java -jar build/libs/VMGui-1.0-all.jar
 ````
@@ -64,7 +64,7 @@ If you're building multiple times add the flag below to skip converting icons to
 ## Requirements and Dependencies
 
 * Gradle
-* Java 17+
+* Java 17
 * All project dependencies are listed in [libs.versions.toml](gradle/libs.versions.toml)
 * The project uses [Octicons](https://github.com/primer/octicons) for its icons
 
