@@ -2,6 +2,7 @@ module com.github.mskocz.vmgui {
     requires javafx.controls;
     requires javafx.fxml;
     requires atlantafx.base;
+    requires java.desktop;
 
 
     opens com.github.mskocz.vmgui to javafx.fxml;

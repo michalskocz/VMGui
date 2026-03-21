@@ -15,10 +15,11 @@ public class VMGui extends Application {
         var fxmlLoader = new FXMLLoader(Objects.requireNonNull(VMGui.class.getResource("gui/Topology.fxml"), "Problem loading Topology.fxml configuration file"));
         Scene scene = new Scene(fxmlLoader.load());
 
-        AppTheme.PRIMER_DARK.apply();
+        AppTheme.DRACULA.apply();
         stage.setTitle("VM-Gui");
         stage.setResizable(true);
         stage.setScene(scene);
         stage.show();
     }
+
 }
