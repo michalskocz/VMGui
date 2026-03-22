@@ -28,8 +28,10 @@ jobs:
           java-version: '17'
           cache: gradle
 
+
       - name: Cache generated Octicons PNGs
         uses: actions/cache@v4
+        continue-on-error: true
         with:
           path: build/generated/resources/external/octicons
           key: octicons-png-${{ runner.os }}-${{ hashFiles('external/octicons/icons/**/*.svg') }}

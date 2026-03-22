@@ -35,13 +35,7 @@
     <img src="https://github.com/michalskocz/VMGui/actions/workflows/build.yml/badge.svg" alt="Build Status" />
   </a>
 
-  <a href="https://github.com/michalskocz/VMGui/suites/artifacts">
-    <img src="https://badgen.net/badge/Artifacts/Linux%20ZIP/available/green" alt="Linux ZIP" />
-  </a>
 
-  <a href="https://github.com/michalskocz/VMGui/suites/artifacts">
-    <img src="https://badgen.net/badge/Artifacts/Windows%20ZIP/available/green" alt="Windows ZIP" />
-  </a>
 </div>
 
 ---
