@@ -74,11 +74,7 @@ If you're building multiple times add the flag below to skip converting icons to
 * All project dependencies are listed in [libs.versions.toml](gradle/libs.versions.toml)
 * The project uses [Octicons](https://github.com/primer/octicons) for its icons
 
-## Artifacts
-
-After running the workflow, you can download the built ZIPs from GitHub Actions artifacts:
-
-* [VMGui Linux ZIP](https://github.com/michalskocz/VMGui/suites/artifacts)
-* [VMGui Windows ZIP](https://github.com/michalskocz/VMGui/suites/artifacts)
+## 📥 Download
+→ **[release](https://github.com/michalskocz/VMGui/releases/latest)**
 
 

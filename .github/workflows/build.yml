@@ -6,6 +6,9 @@ on:
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -27,7 +30,6 @@ jobs:
           distribution: temurin
           java-version: '17'
           cache: gradle
-
 
       - name: Cache generated Octicons PNGs
         uses: actions/cache@v4
@@ -73,10 +75,35 @@ jobs:
           $dest = Join-Path -Path $PWD -ChildPath "build/libs/VMGui-${{ runner.os }}.zip"
           Compress-Archive -Path $jar.FullName -DestinationPath $dest -Force
 
-      - name: Upload ZIP
+      - name: Upload ZIP (temporary artifact)
         if: success()
         uses: actions/upload-artifact@v4
         with:
           name: VMGui-${{ runner.os }}
           path: build/libs/VMGui-${{ runner.os }}.zip
           if-no-files-found: error
+
+
+  release:
+    needs: build
+    if: success()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: VMGui-*
+          path: artifacts
+
+      - name: Create/Update "Latest" Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: Latest Build
+          body: |
+            Automatic build from GitHub Actions.
+            - Linux Fat JAR
+            - Windows Fat JAR
+          make_latest: true
+          files: |
+            artifacts/**/*.zip
