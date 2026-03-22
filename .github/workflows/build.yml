@@ -1,7 +1,11 @@
 name: Build VMGui to Fat JAR
 
+
 on:
   workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   build:
@@ -29,29 +33,39 @@ jobs:
         if: runner.os == 'Linux'
         run: chmod +x ./gradlew
 
-      - name: Build shadowJar (Linux)
+      - name: Run tests (Linux)
         if: runner.os == 'Linux'
+        run: ./gradlew test -PskipSvgConvert
+
+      - name: Run tests (Windows)
+        if: runner.os == 'Windows'
+        run: .\gradlew.bat test -PskipSvgConvert
+
+      - name: Build shadowJar (Linux)
+        if: runner.os == 'Linux' && success()
         run: ./gradlew clean shadowJar
 
       - name: Build shadowJar (Windows)
-        if: runner.os == 'Windows'
+        if: runner.os == 'Windows' && success()
         run: .\gradlew.bat clean shadowJar
 
       - name: Pack artifact (Linux)
-        if: runner.os == 'Linux'
+        if: runner.os == 'Linux' && success()
         run: |
           cd build/libs
           jar_name=$(ls *.jar | head -n 1)
           zip "VMGui-${{ runner.os }}.zip" "$jar_name"
 
       - name: Pack artifact (Windows)
-        if: runner.os == 'Windows'
+        if: runner.os == 'Windows' && success()
         shell: powershell
         run: |
           $jar = Get-ChildItem build/libs/*.jar | Select-Object -First 1
-          Compress-Archive -Path $jar.FullName -DestinationPath "build/libs/VMGui-${{ runner.os }}.zip" -Force
+          $dest = Join-Path -Path $PWD -ChildPath "build/libs/VMGui-${{ runner.os }}.zip"
+          Compress-Archive -Path $jar.FullName -DestinationPath $dest -Force
 
       - name: Upload ZIP
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: VMGui-${{ runner.os }}

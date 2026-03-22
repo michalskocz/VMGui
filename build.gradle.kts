@@ -24,8 +24,9 @@ dependencies {
     implementation(libs.xmlgraphic.transcoder)
     implementation(libs.xmlgraphic.codec)
 
-    testImplementation(libs.jupiter.api)
-    testRuntimeOnly(libs.jupiter.engine)
+    testImplementation(libs.jupiter.lib)
+    testRuntimeOnly(libs.jupiter.platform)
+
 }
 
 javafx {
@@ -68,11 +69,9 @@ tasks.withType<JavaExec> {
     jvmArgs = listOf("--enable-native-access=ALL-UNNAMED")
 }
 
-
 val skipSvgConvert = project.hasProperty("skipSvgConvert")
 val svgDir = file("external/octicons/icons")
-val pngDir = file("src/main/resources/external/octicons")
-
+val pngDir = layout.buildDirectory.dir("generated/resources/external/octicons")
 
 sourceSets {
     create("svgConvert") {
@@ -94,15 +93,23 @@ val convertOcticonsToPng by tasks.registering(JavaExec::class) {
     dependsOn(compileSvgConvert)
     mainClass.set("build.utils.SvgToPngConventer")
     classpath = files(compileSvgConvert.map { it.destinationDirectory }) + sourceSets["svgConvert"].runtimeClasspath
-    args(svgDir.absolutePath, pngDir.absolutePath)
-}
 
+
+    inputs.dir(svgDir)
+    outputs.dir(pngDir)
+
+
+    val outputPath = pngDir.map { it.asFile.absolutePath }
+    args = listOf(svgDir.absolutePath, outputPath.get())
+}
 
 tasks.named<ProcessResources>("processResources") {
     if (!skipSvgConvert) {
         dependsOn(convertOcticonsToPng)
     }
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
+
+
     from(pngDir) {
         into("external/octicons")
     }

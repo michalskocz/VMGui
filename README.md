@@ -30,6 +30,18 @@
   <a href="https://github.com/michalskocz/VMGui/issues">
     <img src="https://badgen.net/github/issues/michalskocz/VMGui" alt="Issues" />
   </a>
+
+  <a href="https://github.com/michalskocz/VMGui/suites">
+    <img src="https://github.com/michalskocz/VMGui/actions/workflows/build.yml/badge.svg" alt="Build Status" />
+  </a>
+
+  <a href="https://github.com/michalskocz/VMGui/suites/artifacts">
+    <img src="https://badgen.net/badge/Artifacts/Linux%20ZIP/available/green" alt="Linux ZIP" />
+  </a>
+
+  <a href="https://github.com/michalskocz/VMGui/suites/artifacts">
+    <img src="https://badgen.net/badge/Artifacts/Windows%20ZIP/available/green" alt="Windows ZIP" />
+  </a>
 </div>
 
 ---
@@ -67,5 +79,12 @@ If you're building multiple times add the flag below to skip converting icons to
 * Java 17
 * All project dependencies are listed in [libs.versions.toml](gradle/libs.versions.toml)
 * The project uses [Octicons](https://github.com/primer/octicons) for its icons
+
+## Artifacts
+
+After running the workflow, you can download the built ZIPs from GitHub Actions artifacts:
+
+* [VMGui Linux ZIP](https://github.com/michalskocz/VMGui/suites/artifacts)
+* [VMGui Windows ZIP](https://github.com/michalskocz/VMGui/suites/artifacts)
 
 
