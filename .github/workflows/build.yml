@@ -1,6 +1,5 @@
 name: Build VMGui to Fat JAR
 
-
 on:
   workflow_dispatch:
 
@@ -29,6 +28,14 @@ jobs:
           java-version: '17'
           cache: gradle
 
+      - name: Cache generated Octicons PNGs
+        uses: actions/cache@v4
+        with:
+          path: build/generated/resources/external/octicons
+          key: octicons-png-${{ runner.os }}-${{ hashFiles('external/octicons/icons/**/*.svg') }}
+          restore-keys: |
+            octicons-png-${{ runner.os }}-
+
       - name: Make gradlew executable
         if: runner.os == 'Linux'
         run: chmod +x ./gradlew
@@ -53,14 +60,14 @@ jobs:
         if: runner.os == 'Linux' && success()
         run: |
           cd build/libs
-          jar_name=$(ls *.jar | head -n 1)
+          jar_name=$(ls *-all.jar | head -n 1)
           zip "VMGui-${{ runner.os }}.zip" "$jar_name"
 
       - name: Pack artifact (Windows)
         if: runner.os == 'Windows' && success()
         shell: powershell
         run: |
-          $jar = Get-ChildItem build/libs/*.jar | Select-Object -First 1
+          $jar = Get-ChildItem build/libs/*-all.jar | Select-Object -First 1
           $dest = Join-Path -Path $PWD -ChildPath "build/libs/VMGui-${{ runner.os }}.zip"
           Compress-Archive -Path $jar.FullName -DestinationPath $dest -Force
 
