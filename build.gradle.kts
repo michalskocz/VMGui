@@ -73,6 +73,17 @@ val skipSvgConvert = project.hasProperty("skipSvgConvert")
 val svgDir = file("external/octicons/icons")
 val pngDir = layout.buildDirectory.dir("generated/resources/external/octicons")
 
+val selectedSvgNames = setOf(
+    "file-directory-24.svg",
+    "compose-24.svg",
+    "eye-24.svg",
+    "tools-24.svg",
+    "plus-24.svg",
+    "lockup-github-24.svg",
+)
+
+val selectedSvgDir = layout.buildDirectory.dir("tmp/selected-octicons-svg")
+
 sourceSets {
     create("svgConvert") {
         java.srcDir("src/svgConvert/java")
@@ -87,20 +98,28 @@ val compileSvgConvert by tasks.registering(JavaCompile::class) {
     destinationDirectory.set(layout.buildDirectory.dir("classes/svgConvert"))
 }
 
+val prepareSelectedOcticons by tasks.registering(Sync::class) {
+    from(svgDir) {
+        include(selectedSvgNames)
+    }
+    into(selectedSvgDir)
+}
+
 val convertOcticonsToPng by tasks.registering(JavaExec::class) {
     group = "build"
-    description = "Konwertuje SVG Octicons do PNG"
-    dependsOn(compileSvgConvert)
+    description = "Konwertuje wybrane SVG Octicons do PNG"
+    dependsOn(compileSvgConvert, prepareSelectedOcticons)
+
     mainClass.set("build.utils.SvgToPngConventer")
     classpath = files(compileSvgConvert.map { it.destinationDirectory }) + sourceSets["svgConvert"].runtimeClasspath
 
-
-    inputs.dir(svgDir)
+    inputs.files(selectedSvgNames.map { File(svgDir, it) })
     outputs.dir(pngDir)
 
-
-    val outputPath = pngDir.map { it.asFile.absolutePath }
-    args = listOf(svgDir.absolutePath, outputPath.get())
+    args = listOf(
+        selectedSvgDir.get().asFile.absolutePath,
+        pngDir.get().asFile.absolutePath
+    )
 }
 
 tasks.named<ProcessResources>("processResources") {
@@ -108,7 +127,6 @@ tasks.named<ProcessResources>("processResources") {
         dependsOn(convertOcticonsToPng)
     }
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
-
 
     from(pngDir) {
         into("external/octicons")
