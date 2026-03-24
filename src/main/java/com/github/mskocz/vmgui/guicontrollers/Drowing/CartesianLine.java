@@ -28,7 +28,7 @@ package com.github.mskocz.vmgui.guicontrollers.Drowing;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Paint;
 
-public class CartesianLine extends CanvasUtils {
+public class CartesianLine {
 
     public record CartesianLineParameters(Paint paint, double width) {}
 
@@ -53,7 +53,7 @@ public class CartesianLine extends CanvasUtils {
         double height = window.height();
         double lineWidth = parameters.width;
 
-        if(isPointInvalid(a, width, height) || isPointInvalid(b, width, height)) {
+        if(a.isPointInvalid(width, height) || b.isPointInvalid(width, height)) {
             throw new IllegalArgumentException("The points value passed is invalid.");
         }
 

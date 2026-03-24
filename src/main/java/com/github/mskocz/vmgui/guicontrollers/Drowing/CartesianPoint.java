@@ -25,4 +25,12 @@ SOFTWARE.
 package com.github.mskocz.vmgui.guicontrollers.Drowing;
 
 public record CartesianPoint(double x, double y) {
+    public boolean isPointInvalid(double width, double height) throws IllegalArgumentException{
+        if (width <= 0 || height <= 0) {
+            throw  new IllegalArgumentException("The window value passed is invalid.");
+        }
+        double x = this.x();
+        double y = this.y();
+        return  x <= 0 || x >= width || y <= 0 || y >= height;
+    }
 }

@@ -33,6 +33,9 @@ public class Main {
             Thread GuiTherad = new Thread(VMGui::launch);
             Thread EngineThread = new Thread(Engine::launch);
 
+            GuiTherad.setDaemon(true);
+            EngineThread.setDaemon(true);
+
             GuiTherad.start();
             EngineThread.start();
 

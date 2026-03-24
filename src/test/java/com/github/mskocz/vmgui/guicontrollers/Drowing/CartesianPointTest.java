@@ -22,16 +22,35 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-module com.github.mskocz.vmgui {
-    requires javafx.controls;
-    requires javafx.fxml;
-    requires atlantafx.base;
-    requires java.desktop;
+package com.github.mskocz.vmgui.guicontrollers.Drowing;
 
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-    opens com.github.mskocz.vmgui to javafx.fxml;
-    exports com.github.mskocz.vmgui;
-    exports com.github.mskocz.vmgui.guicontrollers;
-    opens com.github.mskocz.vmgui.guicontrollers to javafx.fxml;
+import static org.junit.jupiter.api.Assertions.*;
 
+public class CartesianPointTest {
+    @DisplayName("Point validation")
+    @Test
+    public void poinValidation() {
+
+        double width_valid = 1980;
+        double height_valid = 1080;
+        for(double i = 0; i < 100; i++) {
+            double ax = width_valid * ((i + 1) / 200);
+            double ay = height_valid * ((i +1)/ 200);
+            var p = new CartesianPoint(ax, ay);
+            assertFalse(p.isPointInvalid(width_valid, height_valid));
+        }
+
+        for(double i = 0; i < 100; i++) {
+            double ax = width_valid * (200 / (i +1)) + 2;
+            double ay = height_valid * (200 / (i +1)) + 2;
+            var p = new CartesianPoint(ax, ay);
+            assertTrue(p.isPointInvalid(width_valid, height_valid));
+        }
+        var p = new CartesianPoint(67, 67);
+        assertThrows(IllegalArgumentException.class, () -> p.isPointInvalid(-6, 7));
+
+    }
 }

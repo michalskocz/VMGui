@@ -26,7 +26,7 @@ package com.github.mskocz.vmgui.guicontrollers.Drowing;
 
 import javafx.scene.canvas.Canvas;
 
-public class ResizableCanvas extends Canvas {
+public final class ResizableCanvas extends Canvas {
 
     @Override
     public boolean isResizable() {

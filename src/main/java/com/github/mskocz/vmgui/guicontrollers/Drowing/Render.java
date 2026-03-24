@@ -24,13 +24,15 @@ SOFTWARE.
 
 package com.github.mskocz.vmgui.guicontrollers.Drowing;
 
-public class CanvasUtils {
-    public static boolean isPointInvalid(CartesianPoint p, double width, double height) throws IllegalArgumentException{
-        if (width <= 0 || height <= 0) {
-            throw  new IllegalArgumentException("The window value passed is invalid.");
-        }
-        double x = p.x();
-        double y = p.y();
-        return  x <= 0 || x >= width || y <= 0 || y >= height;
+public class Render {
+    private static final Object renderSync = new Object();
+    private static WindowInfo window;
+
+
+
+
+    public static void setWindow(WindowInfo window) {
+        Render.window = window;
     }
+
 }

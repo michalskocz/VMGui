@@ -24,6 +24,9 @@ SOFTWARE.
 
 package com.github.mskocz.vmgui.guicontrollers;
 
+import com.github.mskocz.vmgui.guicontrollers.Drowing.Render;
+import com.github.mskocz.vmgui.guicontrollers.Drowing.WindowInfo;
+import com.github.mskocz.vmgui.guicontrollers.controls.MouseControler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -33,9 +36,10 @@ import javafx.scene.layout.VBox;
 
 
 import java.awt.Desktop;
+import java.lang.ref.SoftReference;
 import java.net.URI;
 
-public class TopologyController {
+public final class TopologyController {
     @FXML BorderPane menu;
     @FXML private StackPane canvasContainer;
     @FXML private VBox VMBar;
@@ -53,17 +57,16 @@ public class TopologyController {
 
     @FXML private void openGithub()  {
         var github = new Thread(() -> {
-            try {
-                if (Desktop.isDesktopSupported()) {
-                    Desktop.getDesktop().browse(new URI("https://github.com/michalskocz/VMGui"));
-                }
-            } catch (Exception ignore) {}
+            try { if (Desktop.isDesktopSupported()) Desktop.getDesktop().browse(new URI("https://github.com/michalskocz/VMGui")); }
+            catch (Exception ignore) {}
         });
         github.start();
+
     }
 
     @FXML private void initialize() {
         setUpCanvas();
+        setUpMouse();
     }
 
     private void setUpCanvas() {
@@ -74,6 +77,20 @@ public class TopologyController {
 
         canvasContainer.widthProperty().addListener((obs, oldVal, newVal) -> redraw());
         canvasContainer.heightProperty().addListener((obs, oldVal, newVal) -> redraw());
+    }
+
+
+    private void setUpMouse() {
+        canvasContainer.setOnMouseClicked(mouseEvent ->
+                MouseControler.handleClicked(new SoftReference<>(mouseEvent)));
+        canvasContainer.setOnMousePressed(mouseEvent ->
+                MouseControler.handlPresed(new SoftReference<>(mouseEvent)));
+        canvasContainer.setOnMouseReleased(mouseEvent ->
+                MouseControler.handleReleased(new SoftReference<>(mouseEvent)));
+        canvasContainer.setOnMouseMoved(mouseEvent ->
+                MouseControler.handlMuve(new SoftReference<>(mouseEvent)));
+        canvasContainer.setOnScroll(scrollEvent ->
+                MouseControler.handleScroll(new SoftReference<>(scrollEvent)));
     }
 
     private void redraw() {
@@ -88,7 +105,8 @@ public class TopologyController {
         canvas.setHeight(height);
 
         gc.clearRect(0, 0, width, height);
-
-
+        Render.setWindow(new WindowInfo(gc, canvas.getWidth(), canvas.getHeight()));
     }
+
+
 }

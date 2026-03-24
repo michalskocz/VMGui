@@ -25,6 +25,7 @@ SOFTWARE.
 package com.github.mskocz.vmgui;
 
 import com.github.mskocz.vmgui.guicontrollers.AppTheme;
+import com.github.mskocz.vmgui.guicontrollers.controls.MouseControler;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -33,7 +34,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 
-public class VMGui extends Application {
+public final class VMGui extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         var fxmlLoader = new FXMLLoader(VMGui.class.getResource("gui/Topology.fxml"));
@@ -43,7 +44,11 @@ public class VMGui extends Application {
         stage.setTitle("VM-Gui");
         stage.setResizable(true);
         stage.setScene(scene);
+        stage.setOnCloseRequest(event -> {
+            MouseControler.kill();
+        });
         stage.show();
+
     }
 
     public static void launch() {
