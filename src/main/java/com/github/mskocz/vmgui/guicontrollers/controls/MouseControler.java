@@ -24,7 +24,9 @@ SOFTWARE.
 
 package com.github.mskocz.vmgui.guicontrollers.controls;
 
+import com.github.mskocz.vmgui.guicontrollers.Drowing.CartesianLine;
 import com.github.mskocz.vmgui.guicontrollers.Drowing.CartesianPoint;
+import com.github.mskocz.vmgui.guicontrollers.Drowing.Render;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
@@ -34,6 +36,8 @@ import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicReference;
+
+import static javafx.scene.paint.Color.BLUE;
 
 
 public final class MouseControler {
@@ -101,7 +105,10 @@ public final class MouseControler {
 
 
     private static void  Muve(double x, double y) {
-        System.out.println("Muve x: " + x  + " y: " + y);
+//        if (x > 50 && y > 50) {
+//            Render.addLine(new CartesianPoint(50, 50), new CartesianPoint(x, y), new CartesianLine.CartesianLineParameters(BLUE, 2));
+//        }
+
     }
 
     private static void Presed(double x, double y) {
@@ -112,7 +119,7 @@ public final class MouseControler {
     }
 
     private static void Clicked(double x, double y, MouseButton button) {
-        System.out.println("Clicked x: " + x  + " y: " + y);
+        //Render.clean();
     }
 
     private static void Scroll(double deltaY) {

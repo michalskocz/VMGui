@@ -24,15 +24,59 @@ SOFTWARE.
 
 package com.github.mskocz.vmgui.guicontrollers.Drowing;
 
+import javafx.application.Platform;
+
+import javax.swing.text.html.ImageView;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 public class Render {
     private static final Object renderSync = new Object();
     private static WindowInfo window;
-
-
-
+    private static final ConcurrentHashMap<CartesianPoint, ImageView> icons = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<CartesianPoint, CartesianPoint> lines =  new ConcurrentHashMap<>();
+    private static final ConcurrentLinkedQueue<Runnable> renderQueue = new ConcurrentLinkedQueue<>();
+    private static final AtomicBoolean scheduled = new AtomicBoolean(false);
 
     public static void setWindow(WindowInfo window) {
         Render.window = window;
+    }
+
+
+    public static void addLine(CartesianPoint a, CartesianPoint b, CartesianLine.CartesianLineParameters par) {
+        lines.put(a, b);
+        submit(() -> CartesianLine.drow(window, a, b, par));
+    }
+
+    public static void addIcon(CartesianPoint cord, ImageView icon) {
+        icons.put(cord, icon);
+    }
+
+
+    private static void submit(Runnable task) {
+        renderQueue.add(task);
+
+        if (scheduled.compareAndSet(false, true)) {
+            Platform.runLater(() -> {
+                try {
+                    Runnable r;
+                    while ((r = renderQueue.poll()) != null) {
+                        r.run();
+                    }
+                } finally {
+                    scheduled.set(false);
+                    if (!renderQueue.isEmpty()) {
+                        submit(null);
+                    }
+                }
+            });
+        }
+    }
+
+    public static void clean() {
+        if (window != null)
+            submit(() -> window.gc().clearRect(0, 0, window.width(), window.height()));
     }
 
 }
