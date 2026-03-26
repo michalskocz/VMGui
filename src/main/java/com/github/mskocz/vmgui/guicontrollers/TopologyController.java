@@ -24,8 +24,10 @@ SOFTWARE.
 
 package com.github.mskocz.vmgui.guicontrollers;
 
+import com.github.mskocz.vmgui.guicontrollers.Drowing.CartesianPoint;
 import com.github.mskocz.vmgui.guicontrollers.Drowing.Render;
 import com.github.mskocz.vmgui.guicontrollers.Drowing.WindowInfo;
+import com.github.mskocz.vmgui.guicontrollers.Drowing.icons.IconType;
 import com.github.mskocz.vmgui.guicontrollers.controls.MouseControler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -104,8 +106,9 @@ public final class TopologyController {
         canvas.setWidth(width);
         canvas.setHeight(height);
 
-        gc.clearRect(0, 0, width, height);
+
         Render.setWindow(new WindowInfo(gc, canvas.getWidth(), canvas.getHeight()));
+        Render.redrow();
     }
 
 

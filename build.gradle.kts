@@ -21,8 +21,7 @@ java {
 
 dependencies {
     implementation(libs.atlantafx)
-    implementation(libs.xmlgraphic.transcoder)
-    implementation(libs.xmlgraphic.codec)
+    implementation(libs.batik.all)
 
     testImplementation(libs.jupiter.lib)
     testRuntimeOnly(libs.jupiter.platform)
@@ -31,7 +30,7 @@ dependencies {
 
 javafx {
     version = libs.versions.javafx.get()
-    modules("javafx.controls", "javafx.fxml")
+    modules("javafx.controls", "javafx.fxml", "javafx.swing")
 }
 
 application {

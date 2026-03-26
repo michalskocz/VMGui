@@ -32,6 +32,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 
 import java.lang.ref.SoftReference;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -105,9 +106,7 @@ public final class MouseControler {
 
 
     private static void  Muve(double x, double y) {
-//        if (x > 50 && y > 50) {
-//            Render.addLine(new CartesianPoint(50, 50), new CartesianPoint(x, y), new CartesianLine.CartesianLineParameters(BLUE, 2));
-//        }
+
 
     }
 

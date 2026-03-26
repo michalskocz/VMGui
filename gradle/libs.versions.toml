@@ -8,15 +8,18 @@ atlantafx = "2.0.0"
 jupiter = "5.12.1"
 shadowjar = "9.4.0"
 apache_xmlgraphics = "1.16"
-
+apache_batik = "1.17"
 
 [libraries]
-jupiter-lib = { module = "org.junit.jupiter:junit-jupiter", version.ref="jupiter"}
-jupiter-platform = { module = "org.junit.platform:junit-platform-launcher"}
+jupiter-lib = { module = "org.junit.jupiter:junit-jupiter", version.ref="jupiter" }
+jupiter-platform = { module = "org.junit.platform:junit-platform-launcher" }
 atlantafx = { module = "io.github.mkpaz:atlantafx-base", version.ref = "atlantafx" }
-xmlgraphic-transcoder = { module = "org.apache.xmlgraphics:batik-transcoder", version.ref = "apache_xmlgraphics"}
-xmlgraphic-codec = { module = "org.apache.xmlgraphics:batik-codec", version.ref = "apache_xmlgraphics"}
+
+xmlgraphic-transcoder = { module = "org.apache.xmlgraphics:batik-transcoder", version.ref = "apache_xmlgraphics" }
+xmlgraphic-codec = { module = "org.apache.xmlgraphics:batik-codec", version.ref = "apache_xmlgraphics" }
+
+batik-all = { module = "org.apache.xmlgraphics:batik-all", version.ref = "apache_batik" }
 
 [plugins]
 javafx = { id = "org.openjfx.javafxplugin", version.ref = "javafxPlugin" }
-shadowjar = { id = "com.gradleup.shadow", version.ref = "shadowjar"}
+shadowjar = { id = "com.gradleup.shadow", version.ref = "shadowjar" }
