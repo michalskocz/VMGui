@@ -69,6 +69,7 @@ public final class TopologyController {
     @FXML private void initialize() {
         setUpCanvas();
         setUpMouse();
+        Render.addIcon(new CartesianPoint(200, 200), IconType.VM);
     }
 
     private void setUpCanvas() {

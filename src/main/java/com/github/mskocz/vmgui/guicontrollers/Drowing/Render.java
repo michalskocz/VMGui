@@ -26,6 +26,7 @@ package com.github.mskocz.vmgui.guicontrollers.Drowing;
 
 import com.github.mskocz.vmgui.guicontrollers.Drowing.icons.IconDrow;
 import com.github.mskocz.vmgui.guicontrollers.Drowing.icons.IconType;
+import com.github.mskocz.vmgui.guicontrollers.controls.MouseControler;
 import javafx.application.Platform;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -57,7 +58,7 @@ public class Render {
 
     public static void addIcon(CartesianPoint cord, IconType icon) {
         icons.put(cord, icon);
-        submit(() -> IconDrow.draw(window.gc(), icon, cord, 1));
+        submit(() -> IconDrow.draw(window.gc(), icon, cord, MouseControler.getScale()));
     }
     public static void removeIcon(CartesianPoint cord) {
         if (cord != null) submit(() -> _removeIcon(cord));
@@ -111,13 +112,13 @@ public class Render {
             for (Map.Entry<CartesianPoint, IconType> entry : icons.entrySet()) {
                 CartesianPoint point = entry.getKey();
                 IconType icon = entry.getValue();
-                IconDrow.draw(window.gc(), icon, point, 1);
+                IconDrow.draw(window.gc(), icon, point, MouseControler.getScale());
             }
 
             for (Map.Entry<CartesianPoint, CartesianPoint> entry : lines.entrySet()) {
                 CartesianPoint a = entry.getKey();
                 CartesianPoint b = entry.getValue();
-                CartesianLine.drow(window, a, b, new CartesianLine.CartesianLineParameters(BLUE, 2));
+                CartesianLine.drow(window, a, b, new CartesianLine.CartesianLineParameters(BLUE, MouseControler.getScale()));
             }
         });
     }
