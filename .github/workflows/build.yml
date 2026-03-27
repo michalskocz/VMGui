@@ -46,19 +46,19 @@ jobs:
 
       - name: Run tests (Linux)
         if: runner.os == 'Linux'
-        run: ./gradlew test -PskipSvgConvert
+        run: ./gradlew test
 
       - name: Run tests (Windows)
         if: runner.os == 'Windows'
-        run: .\gradlew.bat test -PskipSvgConvert
+        run: .\gradlew.bat test
 
       - name: Build shadowJar (Linux)
         if: runner.os == 'Linux' && success()
-        run: ./gradlew clean shadowJar
+        run: ./gradlew shadowJar
 
       - name: Build shadowJar (Windows)
         if: runner.os == 'Windows' && success()
-        run: .\gradlew.bat clean shadowJar
+        run: .\gradlew.bat shadowJar
 
       - name: Pack artifact (Linux)
         if: runner.os == 'Linux' && success()

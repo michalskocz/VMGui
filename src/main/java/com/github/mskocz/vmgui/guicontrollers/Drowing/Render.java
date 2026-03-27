@@ -36,18 +36,20 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import static javafx.scene.paint.Color.BLUE;
 
 public class Render {
-    private static final Object renderSync = new Object();
-    private static WindowInfo window;
     private static final ConcurrentHashMap<CartesianPoint, IconType> icons = new ConcurrentHashMap<>();
     private static final ConcurrentHashMap<CartesianPoint, CartesianPoint> lines =  new ConcurrentHashMap<>();
 
     private static final ConcurrentLinkedQueue<Runnable> renderQueue = new ConcurrentLinkedQueue<>();
     private static final AtomicBoolean scheduled = new AtomicBoolean(false);
 
+    private static WindowInfo window = null;
+    private static AtomicBoolean disableRender = new AtomicBoolean(false);
+
     public static void setWindow(WindowInfo window) {
         Render.window = window;
     }
     public static void clean() {
+        if (disableRender.get()) return;
         if (window != null) submit(() -> window.gc().clearRect(0, 0, window.width(), window.height()));
     }
 
@@ -70,9 +72,9 @@ public class Render {
 
 
     private static void submit(Runnable task) {
-        if (task != null) {
+        if (task != null || !disableRender.get()) {
             renderQueue.add(task);
-        }
+        } else return;
 
         if (scheduled.compareAndSet(false, true)) {
             Platform.runLater(() -> {
@@ -104,7 +106,7 @@ public class Render {
     }
 
     public static void redrow() {
-        if (window == null) return;
+        if (window == null || disableRender.get()) return;
 
         submit(() -> {
             window.gc().clearRect(0, 0, window.width(), window.height());
@@ -121,5 +123,9 @@ public class Render {
                 CartesianLine.drow(window, a, b, new CartesianLine.CartesianLineParameters(BLUE, MouseControler.getScale()));
             }
         });
+    }
+
+    public static void diableRender() {
+        disableRender.set(true);
     }
 }
